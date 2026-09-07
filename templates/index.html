@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini SIEM SOC Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="container">
+    <header>
+        <div>
+            <h1>Mini SIEM</h1>
+            <p>Security Operations Center Dashboard</p>
+        </div>
+        <div class="status"><span class="dot"></span>SYSTEM ONLINE</div>
+    </header>
+
+    <section class="stats">
+        <div class="card"><h3>Total Events</h3><strong id="totalEvents">0</strong></div>
+        <div class="card"><h3>Total Alerts</h3><strong id="totalAlerts">0</strong></div>
+        <div class="card critical"><h3>Critical</h3><strong id="criticalAlerts">0</strong></div>
+        <div class="card high"><h3>High</h3><strong id="highAlerts">0</strong></div>
+    </section>
+
+    <section class="panel chart-panel">
+        <h2>Alert Severity</h2>
+        <canvas id="severityChart"></canvas>
+    </section>
+
+    <section class="panel">
+        <div class="panel-header"><h2>Security Alerts</h2><button onclick="refreshDashboard()">Refresh</button></div>
+        <div class="table-container">
+            <table>
+                <thead><tr><th>ID</th><th>Time</th><th>Alert</th><th>Severity</th><th>Source IP</th><th>MITRE</th><th>Status</th></tr></thead>
+                <tbody id="alertTable"></tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="panel">
+        <h2>Recent Events</h2>
+        <div class="table-container">
+            <table>
+                <thead><tr><th>ID</th><th>Time</th><th>Source</th><th>IP</th><th>User</th><th>Event</th><th>Message</th></tr></thead>
+                <tbody id="eventTable"></tbody>
+            </table>
+        </div>
+    </section>
+</div>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
